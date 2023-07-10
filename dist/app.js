@@ -16,8 +16,7 @@ var _alunoRoutes = require('./routes/alunoRoutes'); var _alunoRoutes2 = _interop
 var _fotoRoutes = require('./routes/fotoRoutes'); var _fotoRoutes2 = _interopRequireDefault(_fotoRoutes);
 
 const whiteList = [
-  'http://34.95.207.75:81',
-  'http://localhost:3000',
+  'http://34.95.207.75:82',
 ];
 
 const corsOptions = {
