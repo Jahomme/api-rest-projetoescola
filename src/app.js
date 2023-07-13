@@ -17,6 +17,7 @@ import fotoRoutes from './routes/fotoRoutes';
 
 const whiteList = [
   'http://34.95.207.75:82',
+  'http://localhost:3000',
 ];
 
 const corsOptions = {
