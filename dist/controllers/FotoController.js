@@ -6,6 +6,15 @@ var _Foto = require('../models/Foto'); var _Foto2 = _interopRequireDefault(_Foto
 const upload = _multer2.default.call(void 0, _multerConfig2.default).single('foto');
 
 class FotoController {
+  async index(req, res) {
+    const fotos = await _Foto2.default.findAll({
+      attributes: ['id', 'url', 'filename'],
+      order: ['id', 'DESC'],
+    });
+
+    res.json(fotos);
+  }
+
   store(req, res) {
     return upload(req, res, async (err) => {
       if (err) {

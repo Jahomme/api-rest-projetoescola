@@ -6,6 +6,15 @@ import Foto from '../models/Foto';
 const upload = multer(multerConfig).single('foto');
 
 class FotoController {
+  async index(req, res) {
+    const fotos = await Foto.findAll({
+      attributes: ['id', 'url', 'filename'],
+      order: ['id', 'DESC'],
+    });
+
+    res.json(fotos);
+  }
+
   store(req, res) {
     return upload(req, res, async (err) => {
       if (err) {
