@@ -53,8 +53,7 @@ class UserController {
 
   async delete(req, res) {
     try {
-      const { id } = req.params;
-      const user = await _User2.default.findByPk(id);
+      const user = await _User2.default.findByPk(req.userId);
       if (!user) {
         return res.status(400).json({
           errors: ['Usuário não existe'],

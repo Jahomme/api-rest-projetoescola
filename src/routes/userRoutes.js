@@ -10,6 +10,6 @@ const router = new Router();
 
 router.post('/', userController.store);
 router.put('/', loginRequired, userController.update);
-router.delete('/:id', loginRequired, userController.delete);
+router.delete('/', loginRequired, userController.delete);
 
 export default router;
