@@ -7,12 +7,27 @@ const upload = _multer2.default.call(void 0, _multerConfig2.default).single('fot
 
 class FotoController {
   async index(req, res) {
-    const fotos = await _Foto2.default.findAll({
-      attributes: ['id', 'url', 'filename'],
-      order: ['id', 'DESC'],
-    });
+    try {
+      const { aluno_id } = req.body;
 
-    res.json(fotos);
+      if (!aluno_id) {
+        return res.status(400).json({
+          errors: ['Faltando ID do aluno'],
+        });
+      }
+
+      const fotos = await _Foto2.default.findAll({
+        where: { aluno_id },
+        attributes: ['id', 'url', 'filename'],
+        order: [['id', 'DESC']],
+      });
+
+      return res.json(fotos);
+    } catch (e) {
+      return res.status(400).json({
+        errors: e.errors.map((err) => err.message),
+      });
+    }
   }
 
   store(req, res) {
