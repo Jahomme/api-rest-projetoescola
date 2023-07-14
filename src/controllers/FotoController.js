@@ -8,7 +8,7 @@ const upload = multer(multerConfig).single('foto');
 class FotoController {
   async index(req, res) {
     try {
-      const { aluno_id } = req.body;
+      const { aluno_id } = req.params;
 
       if (!aluno_id) {
         return res.status(400).json({
