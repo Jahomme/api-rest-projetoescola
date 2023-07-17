@@ -50,6 +50,38 @@ class FotoController {
       }
     });
   }
+
+  async delete(req, res) {
+    try {
+      const { aluno_id, foto_id } = req.params;
+
+      if (!aluno_id || !foto_id) {
+        return res.status(400).json({
+          errors: ['Faltando ID do aluno ou da foto'],
+        });
+      }
+
+      const foto = await _Foto2.default.findOne({
+        where: { id: foto_id, aluno_id },
+      });
+
+      if (!foto) {
+        return res.status(400).json({
+          errors: ['Foto não encontrada para o aluno especificado'],
+        });
+      }
+
+      await foto.destroy();
+
+      return res.json({
+        mensagem: 'Foto excluída com sucesso',
+      });
+    } catch (e) {
+      return res.status(400).json({
+        errors: e.errors.map((err) => err.message),
+      });
+    }
+  }
 }
 
 exports. default = new FotoController();

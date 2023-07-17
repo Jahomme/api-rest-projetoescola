@@ -6,6 +6,6 @@ var _FotoController = require('../controllers/FotoController'); var _FotoControl
 const router = new (0, _express.Router)();
 
 router.post('/', _loginRequired2.default, _FotoController2.default.store);
-router.get('/:aluno_id', _loginRequired2.default, _FotoController2.default.index);
+router.get('/:aluno_id/foto/:foto_id', _loginRequired2.default, _FotoController2.default.index);
 
 exports. default = router;
