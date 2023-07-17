@@ -7,5 +7,6 @@ const router = new Router();
 
 router.post('/', loginRequired, fotoController.store);
 router.get('/:aluno_id/foto/:foto_id', loginRequired, fotoController.index);
+router.delete('/:aluno_id/foto/:foto_id', loginRequired, fotoController.delete);
 
 export default router;
