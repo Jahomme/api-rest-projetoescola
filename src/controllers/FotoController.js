@@ -2,7 +2,6 @@ import multer from 'multer';
 import multerConfig from '../config/multerConfig';
 
 import Foto from '../models/Foto';
-import Aluno from '../models/Aluno';
 
 const upload = multer(multerConfig).single('foto');
 
@@ -85,21 +84,28 @@ class FotoController {
   }
 
   async update(req, res) {
-    const { id } = req.params; // Id do aluno
+    const { aluno_id } = req.params; // Id do aluno
     const { fotos } = req.body; // Novo array de fotos
 
     try {
     // Primeiro, verifique se o aluno existe no banco de dados
-      const aluno = await Aluno.findById(id);
-      if (!aluno) {
-        return res.status(404).json({ mensagem: 'Aluno não encontrado.' });
+      if (!aluno_id) {
+        return res.status(400).json({
+          errors: ['Faltando ID do aluno'],
+        });
       }
 
+      const fotosArray = await Foto.findAll({
+        where: { aluno_id },
+        attributes: ['id', 'url', 'filename'],
+        order: [['id', 'DESC']],
+      });
+
       // Atualize o array de fotos do aluno com o novo array fornecido
-      aluno.fotos = fotos;
+      fotosArray.fotos = fotos;
 
       // Salve as alterações no banco de dados
-      await aluno.save();
+      await fotosArray.save();
 
       return res.status(200).json({ mensagem: 'Disposição das fotos atualizada com sucesso.' });
     } catch (error) {
