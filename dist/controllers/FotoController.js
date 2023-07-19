@@ -2,6 +2,7 @@
 var _multerConfig = require('../config/multerConfig'); var _multerConfig2 = _interopRequireDefault(_multerConfig);
 
 var _Foto = require('../models/Foto'); var _Foto2 = _interopRequireDefault(_Foto);
+var _Aluno = require('../models/Aluno'); var _Aluno2 = _interopRequireDefault(_Aluno);
 
 const upload = _multer2.default.call(void 0, _multerConfig2.default).single('foto');
 
@@ -80,6 +81,30 @@ class FotoController {
       return res.status(400).json({
         errors: e.errors.map((err) => err.message),
       });
+    }
+  }
+
+  async update(req, res) {
+    const { id } = req.params; // Id do aluno
+    const { fotos } = req.body; // Novo array de fotos
+
+    try {
+    // Primeiro, verifique se o aluno existe no banco de dados
+      const aluno = await _Aluno2.default.findById(id);
+      if (!aluno) {
+        return res.status(404).json({ mensagem: 'Aluno não encontrado.' });
+      }
+
+      // Atualize o array de fotos do aluno com o novo array fornecido
+      aluno.fotos = fotos;
+
+      // Salve as alterações no banco de dados
+      await aluno.save();
+
+      return res.status(200).json({ mensagem: 'Disposição das fotos atualizada com sucesso.' });
+    } catch (error) {
+      console.error('Erro ao atualizar a disposição das fotos:', error);
+      return res.status(500).json({ mensagem: 'Erro ao atualizar a disposição das fotos.' });
     }
   }
 }
