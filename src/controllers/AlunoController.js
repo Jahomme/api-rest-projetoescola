@@ -114,6 +114,41 @@ class AlunoController {
       });
     }
   }
+
+  async updateFotos(req, res) {
+    try {
+      const { id } = req.params;
+
+      if (!id) {
+        return res.status(400).json({
+          errors: ['Faltando ID'],
+        });
+      }
+
+      const aluno = await Aluno.findByPk(id, { include: Foto });
+
+      if (!aluno) {
+        return res.status(400).json({
+          errors: ['Aluno não existe'],
+        });
+      }
+
+      // Assuming you send the reordered photos in the request body with the key "Fotos"
+      const { Fotos } = req.body;
+
+      // Update the Fotos array for the aluno directly
+      aluno.Fotos = Fotos;
+
+      // Save the changes to the database
+      await aluno.save();
+
+      return res.json(aluno);
+    } catch (e) {
+      return res.status(400).json({
+        errors: e.errors.map((err) => err.message),
+      });
+    }
+  }
 }
 
 export default new AlunoController();

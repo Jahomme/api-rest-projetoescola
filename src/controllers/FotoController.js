@@ -2,7 +2,7 @@ import multer from 'multer';
 import multerConfig from '../config/multerConfig';
 
 import Foto from '../models/Foto';
-// import Aluno from '../models/Aluno';
+import Aluno from '../models/Aluno';
 
 const upload = multer(multerConfig).single('foto');
 
@@ -89,19 +89,17 @@ class FotoController {
     // const { fotos } = req.body;
 
     try {
-      if (!aluno_id) {
-        return res.status(400).json({
-          errors: ['Faltando ID do aluno'],
+      const aluno = await Aluno.findByPk(aluno_id);
+      if (!aluno) {
+        return res.status(404).json({
+          mensagem: 'Aluno não encontrado',
         });
       }
 
-      const fotos = await Foto.findAll({
-        where: { aluno_id },
-        attributes: ['id', 'url', 'filename'],
-        order: [['id', 'DESC']],
-      });
+      const novasFotos = [...req.body];
+      aluno.Fotos = novasFotos;
 
-      await fotos.update(req.body);
+      await aluno.update();
 
       return res.status(200).json({ mensagem: 'Disposição das fotos atualizada com sucesso.' });
     } catch (error) {

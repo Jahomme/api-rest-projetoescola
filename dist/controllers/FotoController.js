@@ -2,7 +2,7 @@
 var _multerConfig = require('../config/multerConfig'); var _multerConfig2 = _interopRequireDefault(_multerConfig);
 
 var _Foto = require('../models/Foto'); var _Foto2 = _interopRequireDefault(_Foto);
-// import Aluno from '../models/Aluno';
+var _Aluno = require('../models/Aluno'); var _Aluno2 = _interopRequireDefault(_Aluno);
 
 const upload = _multer2.default.call(void 0, _multerConfig2.default).single('foto');
 
@@ -89,19 +89,17 @@ class FotoController {
     // const { fotos } = req.body;
 
     try {
-      if (!aluno_id) {
-        return res.status(400).json({
-          errors: ['Faltando ID do aluno'],
+      const aluno = await _Aluno2.default.findByPk(aluno_id);
+      if (!aluno) {
+        return res.status(404).json({
+          mensagem: 'Aluno não encontrado',
         });
       }
 
-      const fotos = await _Foto2.default.findAll({
-        where: { aluno_id },
-        attributes: ['id', 'url', 'filename'],
-        order: [['id', 'DESC']],
-      });
+      const novasFotos = [...req.body];
+      aluno.Fotos = novasFotos;
 
-      await fotos.update(req.body);
+      await aluno.update();
 
       return res.status(200).json({ mensagem: 'Disposição das fotos atualizada com sucesso.' });
     } catch (error) {
