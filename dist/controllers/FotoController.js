@@ -98,7 +98,7 @@ class FotoController {
       }
 
       // Atualize o array de fotos do aluno com o novo array fornecido
-      aluno.fotos = fotos;
+      aluno.Fotos = fotos;
 
       // Salve as alterações no banco de dados
       await aluno.save();
