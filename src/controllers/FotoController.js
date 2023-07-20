@@ -85,11 +85,10 @@ class FotoController {
   }
 
   async update(req, res) {
-    const { aluno_id } = req.params; // Id do aluno
-    const { fotos } = req.body; // Novo array de fotos
+    const { aluno_id } = req.params;
+    // const { fotos } = req.body;
 
     try {
-      // Primeiro, verifique se o aluno existe no banco de dados
       const aluno = await Aluno.findByPk(aluno_id);
       if (!aluno) {
         return res.status(404).json({
@@ -97,10 +96,8 @@ class FotoController {
         });
       }
 
-      // Atualize o array de fotos do aluno com o novo array fornecido
-      aluno.Fotos = fotos;
+      aluno.Fotos = req.body;
 
-      // Salve as alterações no banco de dados
       await aluno.update();
 
       return res.status(200).json({ mensagem: 'Disposição das fotos atualizada com sucesso.' });
