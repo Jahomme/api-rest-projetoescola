@@ -10,6 +10,5 @@ router.post('/', _loginRequired2.default, _AlunoController2.default.store);
 router.put('/:id', _loginRequired2.default, _AlunoController2.default.update);
 router.get('/:id', _AlunoController2.default.show);
 router.delete('/:id', _loginRequired2.default, _AlunoController2.default.delete);
-router.put('/fotos/:id', _loginRequired2.default, _AlunoController2.default.updateFotos);
 
 exports. default = router;

@@ -8,6 +8,6 @@ const router = new (0, _express.Router)();
 router.post('/', _loginRequired2.default, _FotoController2.default.store);
 router.get('/:aluno_id/', _loginRequired2.default, _FotoController2.default.index);
 router.delete('/:aluno_id/foto/:foto_id', _loginRequired2.default, _FotoController2.default.delete);
-router.put('/:aluno_id/', _loginRequired2.default, _FotoController2.default.update);
+// router.put('/:aluno_id/', loginRequired, fotoController.update);
 
 exports. default = router;
