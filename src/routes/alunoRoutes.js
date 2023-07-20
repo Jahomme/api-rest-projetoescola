@@ -10,6 +10,6 @@ router.post('/', loginRequired, alunoController.store);
 router.put('/:id', loginRequired, alunoController.update);
 router.get('/:id', alunoController.show);
 router.delete('/:id', loginRequired, alunoController.delete);
-router.put('/:id', loginRequired, alunoController.updateFotos);
+router.put('/fotos/:id', loginRequired, alunoController.updateFotos);
 
 export default router;
