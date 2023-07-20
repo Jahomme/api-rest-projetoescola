@@ -101,7 +101,7 @@ class FotoController {
       aluno.Fotos = fotos;
 
       // Salve as alterações no banco de dados
-      await aluno.save();
+      await aluno.update();
 
       return res.status(200).json({ mensagem: 'Disposição das fotos atualizada com sucesso.' });
     } catch (error) {
