@@ -58,17 +58,16 @@ class FotoController {
 
     try {
       const aluno = await Aluno.findByPk(aluno_id);
-
       if (!aluno) {
         return res.status(404).json({
           mensagem: 'Aluno não encontrado',
         });
       }
 
-      // Assuming you send the reordered photos in the request body with the key "fotos"
-      aluno.Fotos = fotos;
-
-      await aluno.save();
+      // Update the photos in the database
+      await Promise.all(
+        fotos.map((foto) => Foto.update({ id: foto.id }, { where: { aluno_id } })),
+      );
 
       return res.status(200).json({ mensagem: 'Disposição das fotos atualizada com sucesso.' });
     } catch (error) {
