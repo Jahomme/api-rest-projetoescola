@@ -1,16 +1,34 @@
-# api-rest-projetoescola
-API utilizada para dados do Projeto Escola
+<h1 align="center"> API_REST Projeto Escola  </h1>
 
-Variáveis de ambiente utilizadas:
+<p align="center">
+A API_REST Projeto Escola foi criada para ser consumida pela aplicação do repositório: (https://github.com/Jahomme/projetoescola).  <br/>
 
-DATABASE=
-DATABASE_HOST=
-DATABASE_PORT=
-DATABASE_USERNAME=
-DATABASE_PASSWORD=
+</p>
 
-TOKEN_SECRET=
-TOKEN_EXPIRATION=
+<p align="center">
+  <a href="#-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-projeto">Projeto</a>&nbsp;&nbsp;&nbsp;
+</p>
 
-APP_URL=
-APP_PORT=
+
+<br>
+
+
+## 🚀 Tecnologias
+
+Esse projeto foi desenvolvido com as seguintes tecnologias:
+
+- Express
+- Node.js
+- JavaScript
+- HTML e CSS
+- Git e Github
+- MySQL
+- Google Cloud Platform
+  
+
+## 💻 Projeto
+
+A API_REST foi confiigurada com base em express e node.js, e utiliza MySQL como imagem de base de dados. 
+
+- [Visite o projeto online](https://projetoescola-psi.vercel.app/)
